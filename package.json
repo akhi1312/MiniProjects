@@ -1,0 +1,22 @@
+{
+  "name": "timestamp",
+  "version": "1.0.0",
+  "description": "Unix Timestamp Api",
+  "main": "app.js",
+  "start": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Javascript"
+  ],
+  "author": "Akhilesh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cores": "^0.8.5",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1"
+  }
+}

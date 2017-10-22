@@ -3,6 +3,8 @@
 var express = require('express');
 var bodyparser = require('body-parser')
 var cors = require('cors');
+var port = process.env.PORT || 3000;
+var http = require('http');
 
 // Create an instance of express  for our app and instantiate bodyparser  and cors
 var app = module.exports = express();
@@ -10,6 +12,11 @@ app.use(bodyparser.json());
 app.use(cors());
 
 //Get call to return json that format natural and unix date format
+
+var server = http.createServer(app).listen(port, function(){
+  console.log('Express server listening on port ' + port);
+});
+
 app.get('/:datval' , function(req,res){
 
 var datval = req.params.datval;
@@ -48,6 +55,4 @@ naturalDate = naturalDate.toLocaleDateString("en-us",dateFormatting);
 
 
 
-app.listen(3000,function(){
-    console.log("Its Working")
-})
+

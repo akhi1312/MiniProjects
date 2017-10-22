@@ -4,7 +4,8 @@
   "description": "Unix Timestamp Api",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "keywords": [
     "Javascript"
@@ -16,6 +17,7 @@
     "cores": "^0.8.5",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "http": "0.0.0",
     "nodemon": "^1.12.1"
   }
 }

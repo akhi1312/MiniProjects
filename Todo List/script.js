@@ -35,28 +35,25 @@ var todoList ={
     var completedTodo = 0;
     
     // Completed todo List count 
-    for(var i = 0 ; i < this.todos.length ;i++)
-    {
-      if(this.todos[i].completed === true)
-      {
-        completedTodo++;
+
+    this.todos.forEach(function(todo){
+      if(todo.completed === true){
+         completedTodo++ ;
       }
-    }
+    });
     // Case 1 if all tood list is completed make all false 
     if(totalTodo ===  completedTodo)
     {
-      for(var i = 0 ; i < this.todos.length ; i++)
-      {
-        this.todos[i].completed = false ;
-      }
+        this.todos.forEach(function (todo){
+        todo.completed = false;
+      });
     }
     
     //   Case 2 Otherwise make all true ; 
     else {
-      for(var i = 0 ; i < this.todos.length ; i++)
-      {
-        this.todos[i].completed = true ;
-      }
+      this.todos.forEach(function (todo){
+        todo.completed = true;
+      });
       
     }
     
@@ -85,9 +82,9 @@ var todoList ={
     view.displayTodo();
    },
    
-   deleteTodosButton : function(){
-     var position = document.getElementById('deleteTodoposition');
-     todoList.deleteTodo(position.valueAsNumber);
+   deleteTodosButton : function(position){
+    // var position = document.getElementById('deleteTodoposition');
+     todoList.deleteTodo(position);
      position.value = '';
      view.displayTodo();
       } ,
@@ -112,16 +109,15 @@ var todoList ={
       
        var todoUl = document.querySelector('ul');
        todoUl.innerHTML = '';
-      
-      for(var i = 0 ; i < todoList.todos.length ; i++)
-      {
 
-      var todoLi = document.createElement('li');
       
-      var todoTextWithCompletion = '';
-      var todo = todoList.todos[i]
-     
-     
+      
+      todoList.todos.forEach(function(todo ,position){
+        
+       var todoLi = document.createElement('li');
+      
+       var todoTextWithCompletion = '';
+      
       if(todo.completed === true)
       {
         todoTextWithCompletion = '(x) ' + todo.todoText;
@@ -131,11 +127,44 @@ var todoList ={
         todoTextWithCompletion = '( ) ' + todo.todoText
       }
       
+      todoLi.id = position ;
       todoLi.textContent = todoTextWithCompletion ;
+      todoLi.appendChild(this.createDeleteButton());
       todoUl.appendChild(todoLi);
-      }
+     
+        
+      } , this);
       
+    },
+    
+    createDeleteButton : function() {
+      var deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.className = 'deleteButton';
+      return deleteButton;
+    },
+    
+    setUpEventListener : function(){
+      
+      var todoUl = document.querySelector('ul');
+  todoUl.addEventListener('click' , function(event){
+    
+    
+    var elementClicked = event.target ;
+    // Check if clicked element is deletebutton only 
+    
+    if(elementClicked.className  === 'deleteButton')
+    {
+      handlers.deleteTodosButton(parseInt(elementClicked.parentNode.id));
+    }
+   // console.log(event.target.parentNode.id);
+    
+  });
+  
     }
     
   };
+  
+  view.setUpEventListener();
+  
   
